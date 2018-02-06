@@ -1,0 +1,11 @@
+priorityq: An object-oriented priority queue with updatable priorities.
+
+Copyright 2018 Edward L. Platt <ed@elplatt.com>
+
+This software is released under the licenses listed below. You may modify and
+redistribute this software under the terms of any (or all) of the licenses
+listed below). See the associated license files for details.
+
+GPL v3.0 (See LICENSE-GPL)
+BSD 3-Clause (See LICENSE-BSD)
+MIT (See LICENSE-MIT)
