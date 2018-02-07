@@ -41,6 +41,12 @@ class TestMappedQueue(object):
         q = MappedQueue(h)
         self._check_map(q)
 
+    def test_len(self):
+        h = [5, 4, 3, 2, 1, 0]
+        q = MappedQueue(h)
+        self._check_map(q)
+        assert_equal(len(q), 6)
+
     def test_siftup_leaf(self):
         h = [2]
         h_sifted = [2]

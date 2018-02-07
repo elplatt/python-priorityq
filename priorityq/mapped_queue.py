@@ -65,6 +65,9 @@ class MappedQueue(object):
         self.d = dict()
         self._heapify()
     
+    def __len__(self):
+        return len(self.h)
+    
     def _heapify(self):
         """Restore heap invariant and recalculate map."""
         heapq.heapify(self.h)
