@@ -17,7 +17,45 @@ import heapq
 __all__ = ['MappedQueue']
 
 class MappedQueue(object):
-    """Class encapsulating a priority queue implemented as a mapped heap.
+    """The MappedQueue class implements an efficient minimum heap. The
+    smallest element can be popped in O(1) time, new elements can be pushed
+    in O(log n) time, and any element can be removed or updated in O(log n)
+    time. The queue cannot contain duplicate elements and an attempt to push an
+    element already in the queue will have no effect.
+    
+    MappedQueue complements the heapq package from the python standard
+    library. While MappedQueue is designed for maximum compatibility with
+    heapq, it has slightly different functionality.
+    
+    Examples
+    --------
+    
+    A `MappedQueue` can be created empty or optionally given an array of initial
+    elements. Calling `push()` will add an element and calling `pop()` will remove
+    and return the smallest element.
+
+    >>> q = MappedQueue([916, 50, 4609, 493, 237])
+    >>> q.push(1310)
+    True
+    >>> x = [q.pop() for i in range(len(q.h))]
+    >>> x
+    [50, 237, 493, 916, 1310, 4609]
+
+    Elements can also be updated or removed from anywhere in the queue.
+
+    >>> q = MappedQueue([916, 50, 4609, 493, 237])
+    >>> q.remove(493)
+    >>> q.update(237, 1117)
+    >>> x = [q.pop() for i in range(len(q.h))]
+    >>> x
+    [50, 916, 1117, 4609]
+    
+    References
+    ----------
+    .. [1] Cormen, T. H., Leiserson, C. E., Rivest, R. L., & Stein, C. (2001).
+       Introduction to algorithms second edition.
+    .. [2] Knuth, D. E. (1997). The art of computer programming (Vol. 3).
+       Pearson Education.
     """
     
     def __init__(self, data=[]):
