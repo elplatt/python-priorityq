@@ -25,5 +25,13 @@ and return the smallest element.
     >>> x
     [50, 237, 493, 916, 1310, 4609]
 
+Elements can also be updated or removed from anywhere in the queue.
+
+    >>> q = MappedQueue([916, 50, 4609, 493, 237])
+    >>> q.remove(493)
+    >>> q.update(237, 1117)
+    >>> x = [q.pop() for i in range(len(q.h))]
+    >>> x
+    [50, 916, 1117, 4609]
 
 
