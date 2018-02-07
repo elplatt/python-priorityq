@@ -94,12 +94,9 @@ class MappedQueue(object):
         last = self.h.pop()
         self.h[pos] = last
         self.d[last] = pos
-        print(self.h)
         # Restore invariant by sifting up, then down
         pos = self._siftup(pos)
-        print(self.h)
         self._siftdown(pos)
-        print(self.h)
             
     def _siftup(self, pos):
         """Move element at pos down to a leaf by repeatedly moving the smaller
