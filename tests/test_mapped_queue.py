@@ -6,7 +6,7 @@
 #
 # This software is released under multiple licenses. See the LICENSE file for
 # more information.
-# 
+#
 # Authors:
 #   Edward L. Platt <ed@elplatt.com>
 
@@ -14,6 +14,7 @@ from nose.tools import assert_equal
 from nose.tools import raises
 
 from priorityq import MappedQueue
+
 
 class TestMappedQueue(object):
 
@@ -54,7 +55,7 @@ class TestMappedQueue(object):
         q._siftup(0)
         assert_equal(q.h, h_sifted)
         self._check_map(q)
-        
+
     def test_siftup_one_child(self):
         h = [2, 0]
         h_sifted = [0, 2]
@@ -62,7 +63,7 @@ class TestMappedQueue(object):
         q._siftup(0)
         assert_equal(q.h, h_sifted)
         self._check_map(q)
-        
+
     def test_siftup_left_child(self):
         h = [2, 0, 1]
         h_sifted = [0, 2, 1]
@@ -70,7 +71,7 @@ class TestMappedQueue(object):
         q._siftup(0)
         assert_equal(q.h, h_sifted)
         self._check_map(q)
-        
+
     def test_siftup_right_child(self):
         h = [2, 1, 0]
         h_sifted = [0, 1, 2]
@@ -78,7 +79,7 @@ class TestMappedQueue(object):
         q._siftup(0)
         assert_equal(q.h, h_sifted)
         self._check_map(q)
-        
+
     def test_siftup_multiple(self):
         h = [0, 1, 2, 4, 3, 5, 6]
         h_sifted = [1, 3, 2, 4, 0, 5, 6]
@@ -86,7 +87,7 @@ class TestMappedQueue(object):
         q._siftup(0)
         assert_equal(q.h, h_sifted)
         self._check_map(q)
-        
+
     def test_siftdown_leaf(self):
         h = [2]
         h_sifted = [2]
@@ -94,7 +95,7 @@ class TestMappedQueue(object):
         q._siftdown(0)
         assert_equal(q.h, h_sifted)
         self._check_map(q)
-        
+
     def test_siftdown_single(self):
         h = [1, 0]
         h_sifted = [0, 1]
@@ -119,7 +120,7 @@ class TestMappedQueue(object):
             q.push(elt)
         assert_equal(q.h, h_sifted)
         self._check_map(q)
-        
+
     def test_push_duplicate(self):
         to_push = [2, 1, 0]
         h_sifted = [0, 2, 1]
@@ -142,32 +143,31 @@ class TestMappedQueue(object):
             popped.append(q.pop())
         assert_equal(popped, h_sorted)
         self._check_map(q)
-        
+
     def test_remove_leaf(self):
         h = [0, 2, 1, 6, 3, 5, 4]
         h_removed = [0, 2, 1, 6, 4, 5]
         q = self._make_mapped_queue(h)
         removed = q.remove(3)
         assert_equal(q.h, h_removed)
-        
+
     def test_remove_root(self):
         h = [0, 2, 1, 6, 3, 5, 4]
         h_removed = [1, 2, 4, 6, 3, 5]
         q = self._make_mapped_queue(h)
         removed = q.remove(0)
         assert_equal(q.h, h_removed)
-        
+
     def test_update_leaf(self):
         h = [0, 20, 10, 60, 30, 50, 40]
         h_updated = [0, 15, 10, 60, 20, 50, 40]
         q = self._make_mapped_queue(h)
         removed = q.update(30, 15)
         assert_equal(q.h, h_updated)
-        
+
     def test_update_root(self):
         h = [0, 20, 10, 60, 30, 50, 40]
         h_updated = [10, 20, 35, 60, 30, 50, 40]
         q = self._make_mapped_queue(h)
         removed = q.update(0, 35)
         assert_equal(q.h, h_updated)
-        

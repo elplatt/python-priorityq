@@ -16,23 +16,24 @@ import heapq
 
 __all__ = ['MappedQueue']
 
+
 class MappedQueue(object):
     """The MappedQueue class implements an efficient minimum heap. The
     smallest element can be popped in O(1) time, new elements can be pushed
     in O(log n) time, and any element can be removed or updated in O(log n)
     time. The queue cannot contain duplicate elements and an attempt to push an
     element already in the queue will have no effect.
-    
+
     MappedQueue complements the heapq package from the python standard
     library. While MappedQueue is designed for maximum compatibility with
     heapq, it has slightly different functionality.
-    
+
     Examples
     --------
-    
-    A `MappedQueue` can be created empty or optionally given an array of initial
-    elements. Calling `push()` will add an element and calling `pop()` will remove
-    and return the smallest element.
+
+    A `MappedQueue` can be created empty or optionally given an array of
+    initial elements. Calling `push()` will add an element and calling `pop()`
+    will remove and return the smallest element.
 
     >>> q = MappedQueue([916, 50, 4609, 493, 237])
     >>> q.push(1310)
@@ -49,7 +50,7 @@ class MappedQueue(object):
     >>> x = [q.pop() for i in range(len(q.h))]
     >>> x
     [50, 916, 1117, 4609]
-    
+
     References
     ----------
     .. [1] Cormen, T. H., Leiserson, C. E., Rivest, R. L., & Stein, C. (2001).
@@ -57,24 +58,24 @@ class MappedQueue(object):
     .. [2] Knuth, D. E. (1997). The art of computer programming (Vol. 3).
        Pearson Education.
     """
-    
+
     def __init__(self, data=[]):
         """Priority queue class with updatable priorities.
         """
         self.h = list(data)
         self.d = dict()
         self._heapify()
-    
+
     def __len__(self):
         return len(self.h)
-    
+
     def _heapify(self):
         """Restore heap invariant and recalculate map."""
         heapq.heapify(self.h)
         self.d = dict([(elt, pos) for pos, elt in enumerate(self.h)])
         if len(self.h) != len(self.d):
             raise AssertionError("Heap contains duplicate elements")
-    
+
     def push(self, elt):
         """Add an element to the queue."""
         # If element is already in queue, do nothing
@@ -87,7 +88,7 @@ class MappedQueue(object):
         # Restore invariant by sifting down
         self._siftdown(pos)
         return True
-    
+
     def pop(self):
         """Remove and return the smallest element in the queue."""
         # Remove smallest element
@@ -106,7 +107,7 @@ class MappedQueue(object):
         self._siftdown(pos)
         # Return smallest element
         return elt
-    
+
     def update(self, elt, new):
         """Replace an element in the queue with a new one."""
         # Replace
@@ -117,7 +118,7 @@ class MappedQueue(object):
         # Restore invariant by sifting up, then down
         pos = self._siftup(pos)
         self._siftdown(pos)
-        
+
     def remove(self, elt):
         """Remove an element from the queue."""
         # Find and remove element
@@ -138,7 +139,7 @@ class MappedQueue(object):
         # Restore invariant by sifting up, then down
         pos = self._siftup(pos)
         self._siftdown(pos)
-            
+
     def _siftup(self, pos):
         """Move element at pos down to a leaf by repeatedly moving the smaller
         child up."""
@@ -170,7 +171,7 @@ class MappedQueue(object):
             # Update left_pos
             left_pos = (pos << 1) + 1
         return pos
-            
+
     def _siftdown(self, pos):
         """Restore invariant by repeatedly replacing out-of-place element with
         its parent."""
@@ -190,4 +191,3 @@ class MappedQueue(object):
                 # Invariant is satisfied
                 break
         return pos
-    
